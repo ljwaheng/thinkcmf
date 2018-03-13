@@ -62,7 +62,7 @@ class MenuController extends AdminBaseController
                         <td>\$id</td>
                         <td>\$spacer\$name</td>
                         <td>\$app</td>
-                        <td>\$status</td>
+                        <td style='color:#18BC9C;cursor:pointer' class='status-val'>\$status</td>
                         <td>\$str_manage</td>
                     </tr>";
         $category = $tree->getTree(0, $str);
@@ -205,6 +205,48 @@ class MenuController extends AdminBaseController
         $this->assign("select_category", $selectCategory);
         return $this->fetch();
     }
+
+    /**
+     * 后台菜单状态修改
+     * @adminMenu(
+     *     'name'   => '后台菜单状态修改',
+     *     'parent' => 'index',
+     *     'display'=> false,
+     *     'hasView'=> false,
+     *     'order'  => 10000,
+     *     'icon'   => '',
+     *     'remark' => '后台菜单状态修改',
+     *     'param'  => ''
+     * )
+     */
+
+    public function editStatus()
+    {
+      //1：显示；0：不显示
+      if ($this->request->isAjax()) {
+        $id      = $this->request->param('id', 0, 'intval');
+        $oldMenu = Db::name('AdminMenu')->where(['id' => $id])->find();
+        if($oldMenu['status'] == 0){
+          $data = [
+            'id'      => $id,
+            'status'  => 1
+          ];
+        }else{
+          $data = [
+            'id'      => $id,
+            'status'  => 0
+          ];
+        }
+        if(Db::name('AdminMenu')->update($data)){
+
+          echo 1;
+        }else{
+            echo 0;
+        }
+
+      }
+    }
+
 
     /**
      * 后台菜单编辑提交保存

@@ -42,6 +42,28 @@
     </form>
 </div>
 <script src="__STATIC__/js/admin.js"></script>
+
+<script>
+    $(".status-val").click(function(){
+        var id=$(this).prev().prev().prev().text();
+            $.ajax({
+                    url:"{:url('menu/editStatus')}",
+                    type:'post',
+                    data:{id:id
+                    },
+                    success:function(status){
+                       if(status == 1){
+                         location.reload();
+                       }else{
+                         alert('修改显示状态失败，请重试');
+                       }
+                    },
+                    error:function(err){
+                         alert('修改显示状态失败，请重试');
+                    }
+             })
+    })
+</script>
 <script>
     $(document).ready(function() {
         Wind.css('treeTable');
