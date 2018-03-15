@@ -15,7 +15,7 @@ use think\Cache;
 
 class AdminMenuModel extends Model
 {
-    
+
     /**
      * 按父ID查找菜单子项
      * @param int $parentId 父菜单ID

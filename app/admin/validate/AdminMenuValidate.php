@@ -20,7 +20,7 @@ class AdminMenuValidate extends Validate
         'app'        => 'require',
         'controller' => 'require',
         'parent_id'  => 'checkParentId',
-        'action'     => 'require|unique:AdminMenu,app^controller^action',
+        'action'     => 'require',
     ];
 
     protected $message = [
@@ -29,7 +29,6 @@ class AdminMenuValidate extends Validate
         'parent_id'          => '超过了4级',
         'controller.require' => '名称不能为空',
         'action.require'     => '名称不能为空',
-        'action.unique'      => '同样的记录已经存在!',
     ];
 
     protected $scene = [
